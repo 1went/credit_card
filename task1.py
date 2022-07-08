@@ -11,6 +11,8 @@ plt.rcParams['font.sans-serif'] = ['SimHei']
 data = pd.read_csv('./data/credit_card.csv', encoding='gbk')
 data.info()
 des = data.describe()
+data.isnull().any(axis=1)
+data[data.isnull().values == True]
 
 # ---------------------------客户历史信用记录与瑕疵户的关系
 bad_count = data['瑕疵户'].value_counts()
@@ -83,7 +85,7 @@ def func(k):
     li = []
     for i in range(1, 9):
         lab = data[data['个人月收入'] == i]
-        li.append(len(lab[lab['家庭月收入'] == k]) / len(lab['家庭月收入']))
+        li.append(len(lab[lab['家庭月收入'] == k]) / len(lab))
     return li
 
 
@@ -130,7 +132,7 @@ def func1(k):
     li = []
     for i in range(1, 9):
         lab = data[data['月刷卡额'] == i]
-        li.append(len(lab[lab['个人月收入'] == k]) / len(lab['个人月收入']))
+        li.append(len(lab[lab['个人月收入'] == k]) / len(lab))
     return li
 
 
@@ -177,7 +179,7 @@ def func2(k):
     li = []
     for i in range(1, 9):
         lab = data[data['月刷卡额'] == i]
-        li.append(len(lab[lab['家庭月收入'] == k]) / len(lab['家庭月收入']))
+        li.append(len(lab[lab['家庭月收入'] == k]) / len(lab))
     return li
 
 
